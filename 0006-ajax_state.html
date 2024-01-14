@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0006-ajax_state</title>
+  </head>
+  <body>
+    <script>
+      function displayResponse(json) {
+        const header = document.getElementById("response");
+        header.textContent = json.response;
+      }
+
+      const http = new XMLHttpRequest();
+
+      http.onreadystatechange = function () {
+        console.log(`Ready State Change: ${http.readyState}`);
+      };
+
+      http.open("GET", "api/response.json");
+      http.addEventListener("load", function () {
+        if (http.status === 200) {
+          const json = JSON.parse(http.responseText);
+          displayResponse(json);
+        } else {
+          displayResponse({
+            response: "ERROR: JSON not found!",
+          });
+        }
+      });
+
+      http.send();
+    </script>
+    <h1 id="response"></h1>
+  </body>
+</html>
