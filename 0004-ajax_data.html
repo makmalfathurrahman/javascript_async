@@ -7,16 +7,16 @@
   </head>
   <body>
     <script>
-      const http = new XMLHttpRequest();
-      http.open("GET", "api/response.json");
-      http.addEventListener("load", function () {
-        const json = JSON.parse(http.responseText);
+      const ajax = new XMLHttpRequest();
+      ajax.open("GET", "api/response.json");
+      ajax.addEventListener("load", function () {
+        const json = JSON.parse(ajax.responseText);
         const header = document.getElementById("response");
 
         header.textContent = json.response;
       });
 
-      http.send();
+      ajax.send();
     </script>
     <h1 id="response"></h1>
   </body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0008-promise_static</title>
+  </head>
+  <body>
+    <script>
+      function getProduct(product) {
+        return new Promise(function (resolve, reject) {
+          const ajax = new XMLHttpRequest();
+          ajax.open("GET", `api/${product}.json`);
+
+          ajax.onload = function () {
+            if (ajax.status === 200) {
+              resolve(ajax.responseText);
+            } else {
+              reject(`ERROR: ${ajax.status}`);
+            }
+          };
+
+          ajax.send();
+        });
+      }
+
+      const response = Promise.all([
+        getProduct("category1"),
+        getProduct("category2"),
+        getProduct("category3"),
+      ]);
+
+      response
+        .then((value) => {
+          console.info(value);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          console.log("Done!");
+        });
+    </script>
+    <table>
+      <tbody>
+        <tr>
+          <td>ID:</td>
+          <td id="id"></td>
+        </tr>
+        <tr>
+          <td>Product:</td>
+          <td id="product"></td>
+        </tr>
+        <tr>
+          <td>Price:</td>
+          <td id="price"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

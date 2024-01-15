@@ -12,11 +12,11 @@
         header.textContent = json.response;
       }
 
-      const http = new XMLHttpRequest();
-      http.open("GET", "api/hello.json");
-      http.addEventListener("load", function () {
-        if (http.status === 200) {
-          const json = JSON.parse(http.responseText);
+      const ajax = new XMLHttpRequest();
+      ajax.open("GET", "api/hello.json");
+      ajax.addEventListener("load", function () {
+        if (ajax.status === 200) {
+          const json = JSON.parse(ajax.responseText);
           displayResponse(json);
         } else {
           displayResponse({
@@ -25,7 +25,7 @@
         }
       });
 
-      http.send();
+      ajax.send();
     </script>
     <h1 id="response"></h1>
   </body>
